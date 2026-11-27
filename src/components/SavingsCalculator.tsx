@@ -344,6 +344,30 @@ print(res.choices[0].message.content)`,
                   </p>
                 </div>
               </div>
+
+              {monthlySavings > 0.5 && (
+                <Link
+                  href="/playbook/"
+                  className="group mt-4 flex items-center justify-between gap-3 rounded-xl border border-emerald-400/25 bg-emerald-400/[0.06] px-4 py-3 text-xs text-slate-300 transition hover:border-emerald-400/50"
+                >
+                  <span>
+                    {(() => {
+                      const days = Math.max(1, Math.ceil(siteConfig.playbookPriceUSD / (monthlySavings / 30)));
+                      return lang === "zh" ? (
+                        <>
+                          按这个用量，<span className="font-semibold text-emerald-300">{days} 天</span>省下的钱就够买 ${siteConfig.playbookPriceUSD} 开通手册
+                        </>
+                      ) : (
+                        <>
+                          At this usage, the ${siteConfig.playbookPriceUSD} setup playbook pays for itself in{" "}
+                          <span className="font-semibold text-emerald-300">{days} {days === 1 ? "day" : "days"}</span>
+                        </>
+                      );
+                    })()}
+                  </span>
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0 text-emerald-300 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              )}
             </div>
 
             <div className="mt-6 space-y-2.5">

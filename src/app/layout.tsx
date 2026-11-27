@@ -7,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DevStatusBadge } from "@/components/DevStatusBadge";
 import { ContactFloatingWidget } from "@/components/ContactFloatingWidget";
+import { StickyPlaybookBar } from "@/components/StickyPlaybookBar";
 import { AmbientBackground } from "@/components/ui/TechPrimitives";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeContext";
@@ -63,6 +64,7 @@ export default function RootLayout({
             <Navbar />
             <main className="relative z-10 flex-1">{children}</main>
             <Footer />
+            <StickyPlaybookBar />
             <ContactFloatingWidget />
             <DevStatusBadge />
           </LanguageProvider>

@@ -57,7 +57,11 @@ export function Navbar() {
             <Link
               key={href}
               href={href}
-              className="hidden rounded-lg px-2.5 py-1.5 transition hover:bg-white/[0.05] hover:text-white md:inline-block"
+              className={
+                href === "/playbook/"
+                  ? "hidden rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1.5 font-semibold text-emerald-300 transition hover:bg-emerald-400/20 md:inline-block"
+                  : "hidden rounded-lg px-2.5 py-1.5 transition hover:bg-white/[0.05] hover:text-white md:inline-block"
+              }
             >
               {label}
             </Link>

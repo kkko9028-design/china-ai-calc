@@ -160,6 +160,16 @@ export function HomeView() {
               {t("Global access guides", "海外免手机号接入指南")}
             </Link>
           </div>
+          <Link
+            href="/playbook/"
+            className="group mt-4 inline-flex items-center gap-1.5 text-sm text-slate-400 transition hover:text-emerald-300"
+          >
+            {t(
+              `Rather not figure out the signups alone? The $${siteConfig.playbookPriceUSD} playbook walks you through it`,
+              `不想自己摸索注册流程？$${siteConfig.playbookPriceUSD} 手册一步步带你开通`
+            )}
+            <ArrowRight className="h-3.5 w-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </FadeInSection>
         </div>
 
