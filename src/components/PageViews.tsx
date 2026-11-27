@@ -38,6 +38,7 @@ import {
   PlaybookPromoBanner,
 } from "@/components/MonetizationBlocks";
 import { AdSlot } from "@/components/AdSlot";
+import { HeroBillShowdown } from "@/components/HeroBillShowdown";
 import {
   FadeInSection,
   FaqAccordion,
@@ -75,7 +76,9 @@ export function HomeView() {
   return (
     <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
       {/* Hero */}
-      <section className="relative pb-6 pt-14 text-center sm:pt-20">
+      <section className="relative pb-6 pt-14 sm:pt-20">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_1fr] lg:gap-12">
+        <div className="text-center lg:text-left">
         <FadeInSection>
           <Link
             href="/compare/gemini-4-carbon-vs-qwen-4-max/"
@@ -93,7 +96,7 @@ export function HomeView() {
         </FadeInSection>
 
         <FadeInSection delay={0.08}>
-          <h1 className="mx-auto mt-7 max-w-4xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-6xl">
+          <h1 className="mx-auto mt-7 max-w-4xl font-display text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-6xl lg:mx-0 lg:text-[3.5rem]">
             {lang === "zh" ? (
               <>
                 切换至中国旗舰大模型
@@ -117,7 +120,7 @@ export function HomeView() {
         </FadeInSection>
 
         <FadeInSection delay={0.16}>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg lg:mx-0">
             {lang === "zh" ? (
               <>
                 实时对比 2026 年 11 月大模型 Token 价格（支持 Prompt Cache 缓存折算），附带 2 行 OpenAI SDK 无缝迁移代码，在海外免中国手机号、免支付宝直接调用{" "}
@@ -140,7 +143,7 @@ export function HomeView() {
         </FadeInSection>
 
         <FadeInSection delay={0.24}>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
             <Link
               href="#calculator"
               className="group inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] transition hover:bg-emerald-200"
@@ -158,9 +161,15 @@ export function HomeView() {
             </Link>
           </div>
         </FadeInSection>
+        </div>
+
+        <FadeInSection delay={0.2} className="mx-auto w-full max-w-md lg:max-w-none">
+          <HeroBillShowdown />
+        </FadeInSection>
+        </div>
 
         <FadeInSection delay={0.32}>
-          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-xl sm:grid-cols-4">
+          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 overflow-hidden text-center rounded-2xl border border-white/[0.07] bg-white/[0.02] backdrop-blur-xl sm:grid-cols-4">
             {stats.map((s, i) => (
               <div
                 key={s.label}
