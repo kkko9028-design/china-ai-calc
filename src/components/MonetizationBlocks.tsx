@@ -208,6 +208,13 @@ export function PlaybookSalesView() {
   const [fallbackNotice, setFallbackNotice] = useState(false);
 
   const handleBuyClick = async () => {
+    // 1. Primary live checkout: direct hosted Payhip checkout (instant ZIP delivery + PayPal/Card)
+    if (siteConfig.playbookCheckoutUrl.trim()) {
+      window.location.href = siteConfig.playbookCheckoutUrl.trim();
+      return;
+    }
+
+    // 2. Optional dynamic API checkout fallback
     setCheckoutLoading(true);
     setFallbackNotice(false);
     try {
@@ -222,17 +229,8 @@ export function PlaybookSalesView() {
           return;
         }
       }
-      // Fall back to static checkout link if configured
-      if (siteConfig.playbookCheckoutUrl.trim()) {
-        window.location.href = siteConfig.playbookCheckoutUrl.trim();
-        return;
-      }
       setFallbackNotice(true);
     } catch {
-      if (siteConfig.playbookCheckoutUrl.trim()) {
-        window.location.href = siteConfig.playbookCheckoutUrl.trim();
-        return;
-      }
       setFallbackNotice(true);
     } finally {
       setCheckoutLoading(false);
@@ -460,8 +458,8 @@ export function PlaybookSalesView() {
 
                   <p className="text-center text-[11px] leading-relaxed text-slate-500">
                     {t(
-                      "Secure checkout processed by Creem (Merchant of Record). Instant digital delivery begins immediately after payment — see our ",
-                      "由授权收银平台 Creem 安全结算。付款后立即开始数字文件交付，购买即同意 "
+                      "Secure global checkout via Payhip & PayPal (cards accepted). Instant ZIP download begins immediately after payment — see our ",
+                      "由 Payhip & PayPal 提供全球安全结算（支持 PayPal 与国际银行卡）。付款后立即发送 ZIP 下载，购买即同意 "
                     )}
                     <Link href="/terms/" className="underline hover:text-slate-300">
                       {t("Terms", "服务条款")}

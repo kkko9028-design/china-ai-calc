@@ -67,8 +67,8 @@ export function TermsView() {
           </h2>
           <p className="mt-2">
             {t(
-              "Our order checkout process is conducted by our authorized online reseller and Merchant of Record, Creem (Armitage Labs OÜ). Creem handles payment processing, invoicing, and applicable global sales tax / VAT compliance.",
-              "本站数字商品的在线收银结算由授权经销商（Merchant of Record）Creem（Armitage Labs OÜ）处理，负责银行卡安全支付、电子收据开具及全球增值税/销售税合规代缴。"
+              "Our online checkout and instant digital file delivery are powered by Payhip and PayPal. Payment processing, buyer receipts, and applicable digital VAT handling are managed securely through Payhip's checkout platform.",
+              "本站数字商品的在线收银与即时文件发货由 Payhip 与 PayPal 安全处理，负责银行卡/PayPal 支付、电子收据开具及适用地区的数字税合规处理。"
             )}
           </p>
         </section>
@@ -155,8 +155,8 @@ export function PrivacyView() {
           </h2>
           <p className="mt-2">
             {t(
-              "When you purchase a digital product, payment details (card numbers, billing address, tax location) are collected and processed directly by our Merchant of Record, Creem (Armitage Labs OÜ), in accordance with PCI-DSS and EU GDPR standards. Our server never sees or stores your credit card details; we only verify checkout completion status via Creem's API to deliver your digital download.",
-              "当您购买数字商品时，银行卡与账单信息直接由符合 PCI-DSS 与欧盟 GDPR 标准的授权收银平台 Creem 处理。本站服务器从不接触或存储您的银行卡号，仅通过 Creem 官方接口核验订单支付完成状态以向您发放下载文件。"
+              "When you purchase a digital product, payment details (card numbers, PayPal credentials, billing details) are collected and processed directly by Payhip and PayPal in accordance with PCI-DSS and GDPR standards. Our website never sees or stores your payment card details.",
+              "当您购买数字商品时，银行卡与 PayPal 账单信息直接由符合 PCI-DSS 与欧盟 GDPR 标准的 Payhip 与 PayPal 处理。本站服务器从不接触或存储您的任何支付卡信息。"
             )}
           </p>
         </section>

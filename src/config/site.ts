@@ -13,11 +13,9 @@ export const siteConfig = {
   // 可选：Microsoft Clarity 项目 ID（免费看实时访客数 + 访客鼠标录屏回放与点击热力图）
   clarityProjectId: "",
 
-  // === A. $15 付费教程《China AI Direct API Playbook》收银配置 ===
-  // 推荐方式（全自动服务端验单防白嫖发货）：在 Cloudflare Worker「设置 -> 变量和机密」添加 CREEM_API_KEY、CREEM_PRODUCT_ID、PLAYBOOK_SECRET_KEY
-  // 备用方式（静态收款链接）：也可以把静态链接填在下面 playbookCheckoutUrl
+  // === A. $15 付费教程《China AI Direct API Playbook》正式收银链接 (Payhip + PayPal) ===
   playbookPriceUSD: 15,
-  playbookCheckoutUrl: "",
+  playbookCheckoutUrl: "https://payhip.com/b/95aU3",
 
   // === B. 海外云与 GPU 联盟返佣链接 (Affiliate Links — 支持 PayPal 现金提现) ===
   affiliates: {
