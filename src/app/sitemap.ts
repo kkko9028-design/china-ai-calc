@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${base}/starter-kit/`,
+      url: `${base}/playbook/`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.95,

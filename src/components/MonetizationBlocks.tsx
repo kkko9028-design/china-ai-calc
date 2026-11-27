@@ -5,12 +5,11 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpenCheck,
   CheckCircle2,
-  Code2,
   Cpu,
   ExternalLink,
-  FileCode2,
-  PackageCheck,
+  Gift,
   Server,
   ShieldCheck,
   Sparkles,
@@ -25,9 +24,9 @@ import {
 } from "@/components/ui/TechPrimitives";
 
 /**
- * Compact high-converting promo card placed right below the calculator.
+ * High-converting promo banner placed directly below the calculator.
  */
-export function StarterKitPromoBanner() {
+export function PlaybookPromoBanner() {
   const { t } = useLanguage();
 
   return (
@@ -39,41 +38,41 @@ export function StarterKitPromoBanner() {
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-300">
-              <Sparkles className="h-3.5 w-3.5" />
+              <Gift className="h-3.5 w-3.5" />
               {t(
-                `PRODUCTION CODE KIT · $${siteConfig.starterKitPriceUSD} ONE-TIME`,
-                `生产级省钱代码包 · $${siteConfig.starterKitPriceUSD} 一次买断`
+                `STEP-BY-STEP FIELD MANUAL · $${siteConfig.playbookPriceUSD} ONE-TIME`,
+                `保姆级直连实战手册 · $${siteConfig.playbookPriceUSD} 一次买断`
               )}
             </div>
             <h3 className="mt-3 font-display text-xl font-bold text-white sm:text-2xl">
               {t(
-                "Want automatic routing without rewriting your backend?",
-                "不想手动改后端？直接用现成的多模型智能省钱路由器"
+                "Want direct wholesale rates + $20+ in official free token quotas?",
+                "想绕开中间商拿官方底价，并领满 $20+ 官方新户免费 Token 额度？"
               )}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-400">
               {t(
-                "Grab the SwitchCN Smart Router Starter Kit (TypeScript + Python + Docker LiteLLM). Automatically routes 85–90% of routine traffic to DeepSeek V4 / Qwen 4 Max with US/EU Zero Data Retention, automatic 429 failover, and per-request savings telemetry.",
-                "获取 SwitchCN 多模型智能路由代码包（含 TypeScript + Python + Docker 私有网关配置）：自动将 85%–90% 常规请求分流至 DeepSeek V4 / Qwen 4 Max，内置欧美零数据留存（ZDR）请求头、超时自动降级与单次调用省钱账单日志。"
+                "Get The China AI Direct API Playbook (2026 Edition): step-by-step account setup across all 6 official international portals (no +86 phone, no Alipay), how to claim 1M+ free Qwen tokens per model, zero-code setup for Cursor, Claude Code, ChatBox & SillyTavern, plus Hailuo/Kling video API access without $500 deposits.",
+                "获取《2026 中国大模型官方直连实战全手册》：手把手教你免 +86 手机号、用外卡/PayPal 开通 6 大官方国际站，白嫖百万级官方免费额度（当天赚回教程费），零代码填入 Cursor、Claude Code、ChatBox、酒馆 SillyTavern 与 n8n，并附带海螺/可灵视频 API 避开 $500 预充门槛攻略。"
               )}
             </p>
           </div>
 
           <div className="flex w-full shrink-0 flex-col gap-2.5 sm:w-auto sm:flex-row lg:flex-col">
             <Link
-              href="/starter-kit/"
+              href="/playbook/"
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-[0_0_28px_-6px_rgba(16,185,129,0.75)] transition hover:shadow-[0_0_38px_-4px_rgba(34,211,238,0.85)]"
             >
               {t(
-                `Get Smart Router Kit — $${siteConfig.starterKitPriceUSD}`,
-                `查看代码包详情 — $${siteConfig.starterKitPriceUSD}`
+                `Get the Direct API Playbook — $${siteConfig.playbookPriceUSD}`,
+                `查看实战手册详情 — $${siteConfig.playbookPriceUSD}`
               )}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <span className="text-center font-mono text-[11px] text-slate-500">
               {t(
-                "Instant ZIP download · Unlimited commercial use",
-                "付款后秒发 ZIP 源码包 · 无限商业项目授权"
+                "No coding required · Recoup $15 via free quotas",
+                "零代码小白友好 · 领完免费额度当天回本"
               )}
             </span>
           </div>
@@ -84,7 +83,7 @@ export function StarterKitPromoBanner() {
 }
 
 /**
- * High-converting Cloud / VPS / GPU Affiliate cards (PayPal-friendly programs).
+ * Cloud / VPS / GPU Affiliate cards (PayPal-friendly programs).
  */
 export function AffiliateInfraSection() {
   const { lang, t } = useLanguage();
@@ -104,9 +103,9 @@ export function AffiliateInfraSection() {
     {
       badge: t("Developer Cloud Staple", "独立开发者首选云"),
       name: "DigitalOcean Droplets & GPU",
-      desc: "Spin up a rock-solid US/EU Docker Droplet in 55 seconds to host a private LiteLLM + Redis prompt-caching router for your SaaS.",
+      desc: "Spin up a rock-solid US/EU Docker Droplet in 55 seconds to host OpenWebUI, SillyTavern, or a private team AI workspace.",
       descZh:
-        "55 秒快速拉起欧美本土 Docker 云主机，部署你团队专属的 LiteLLM + Redis 缓存加速网关。",
+        "55 秒快速拉起欧美本土 Docker 云主机，部署你专属的 OpenWebUI、SillyTavern 或团队私有 AI 面板。",
       highlight: t("Simple predictable monthly pricing", "账单透明可控 · 极简 Docker 部署"),
       cta: t("Launch Droplet", "前往 DigitalOcean"),
       href: siteConfig.affiliates.digitalOceanUrl,
@@ -114,11 +113,11 @@ export function AffiliateInfraSection() {
     },
     {
       badge: t("Best Budget KVM VPS", "高性价比 KVM 云主机"),
-      name: "Hostinger KVM VPS (Docker Ready)",
-      desc: "Run OpenWebUI, Dify, n8n, and LiteLLM proxy 24/7 on dedicated NVMe KVM hardware at a fraction of hyperscaler VPS costs.",
+      name: "Hostinger KVM VPS (AI Templates)",
+      desc: "Run OpenWebUI, Dify, and n8n automation workflows 24/7 on dedicated NVMe KVM hardware with 1-click templates.",
       descZh:
-        "以极低年付成本独享 NVMe KVM 虚拟机，7×24 小时稳定运行 OpenWebUI、Dify、n8n 与私有 AI 路由网关。",
-      highlight: t("1-click Docker & AI templates", "内置一键 Docker 与 AI 应用模板"),
+        "以极低年付成本独享 NVMe KVM 虚拟机，内置一键模板 7×24 小时稳定运行 OpenWebUI、Dify 与 n8n 工作流。",
+      highlight: t("1-click Docker & n8n/OpenWebUI templates", "内置一键 n8n 与 OpenWebUI 模板"),
       cta: t("Check VPS Plans", "查看高性价比 VPS"),
       href: siteConfig.affiliates.hostingerVpsUrl,
       icon: ShieldCheck,
@@ -131,18 +130,18 @@ export function AffiliateInfraSection() {
         <div>
           <div className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300">
             <Server className="h-3.5 w-3.5" />
-            {t("Self-Host & Private Gateway Stack", "私有化网关与海外部署基础设施")}
+            {t("Self-Host & 24/7 Cloud Apps", "24 小时云端托管与私有化部署")}
           </div>
           <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
             {t(
-              "Recommended Cloud & GPU Hosting for Private AI Routing",
-              "部署私有 AI 网关与开源模型的推荐海外云平台"
+              "Recommended Cloud Hosting for OpenWebUI, n8n & Open Weights",
+              "部署 OpenWebUI、n8n 与开源模型的推荐海外云主机"
             )}
           </h2>
           <p className="mt-1 text-sm text-slate-400">
             {t(
-              "Want 100% control over logs, Redis prompt caching, or self-hosted open weights? Deploy on US/EU infrastructure.",
-              "需要 100% 掌控请求日志、自建 Redis 缓存或私有化运行开源权重？推荐以下欧美主流基础设施。"
+              "Want to run your own private ChatGPT-style UI, n8n automations, or self-hosted models? These US/EU hosts set up in minutes.",
+              "想搭建完全属于自己的私有 AI 聊天界面、n8n 自动化或自托管开源模型？以下欧美主流云平台几分钟即可跑通。"
             )}
           </p>
         </div>
@@ -201,35 +200,54 @@ export function AffiliateInfraSection() {
 }
 
 /**
- * Full dedicated sales page view for /starter-kit/
+ * Full dedicated sales page view for /playbook/ ($15 Direct API Tutorial)
  */
-export function StarterKitSalesView() {
+export function PlaybookSalesView() {
   const { lang, t } = useLanguage();
   const [showPendingNotice, setShowPendingNotice] = useState(false);
 
-  const hasCheckout = Boolean(siteConfig.starterKitCheckoutUrl.trim());
+  const hasCheckout = Boolean(siteConfig.playbookCheckoutUrl.trim());
 
-  const includedFiles = [
+  const chapters = [
     {
-      path: "ts/smartRouter.ts",
-      desc: "Zero-latency prompt complexity classifier + OpenRouter ZDR headers + multi-model automatic failover + real-time savedUSD telemetry.",
+      num: "Chapter 01",
+      title: "The Domestic (.cn) vs. Global Portal Trap",
+      titleZh: "第一章：避开 90% 老外必踩的「国内站 .cn vs 国际站」大坑",
+      desc: "Why 90% of English tutorials give you the wrong base_url causing instant 401 errors—and the 30-second decision matrix for picking the exact right portal.",
       descZh:
-        "零额外延迟提示词复杂度分类器 + OpenRouter 零数据留存（ZDR）强制头 + 多模型故障自动无缝切换 + 单次请求省钱金额统计。",
+        "为什么网上搜到的教程总报 401 密钥无效？一张表看清两套隔离账号体系与 30 秒选型决策。",
     },
     {
-      path: "ts/nextjsRouteExample.ts",
-      desc: "Drop-in Next.js App Router POST /api/chat endpoint ready for production SaaS.",
-      descZh: "开箱即用的 Next.js App Router `/api/chat` 生产级后端接口示例。",
+      num: "Chapter 02",
+      title: "The Free Token Quota Harvester ($20+ Value)",
+      titleZh: "第二章：官方新户免费百万 Token 额度领取清单（价值超 $20）",
+      desc: "Exact steps to activate Alibaba Cloud Model Studio (Singapore) for 1,000,000 free tokens per Qwen model—plus how to lock 'Free Quota Only' so you never get surprise charges.",
+      descZh:
+        "手把手激活阿里云百炼国际站（新加坡节点）领取每模型 100 万免费额度，并开启防超支扣费保护开关，买完教程当天回本。",
     },
     {
-      path: "python/smart_router.py",
-      desc: "Clean Python implementation (OpenAI SDK) for FastAPI, Django, and autonomous agent loops.",
-      descZh: "基于官方 OpenAI SDK 的 Python 生产路由模块，适配 FastAPI 与 Agent 后端。",
+      num: "Chapter 03",
+      title: "All 6 Official International Portals (No +86 Phone)",
+      titleZh: "第三章：6 大中国厂商官方国际站开户与外卡充值全流程",
+      desc: "Verified portals, Visa/Mastercard/PayPal top-up walkthroughs ($1–$5 minimums), and exact endpoints for DeepSeek, Alibaba Qwen (-intl), Moonshot Kimi (.ai), SiliconFlow (.com), MiniMax (.io), and Zhipu (Z.ai).",
+      descZh:
+        "覆盖 DeepSeek、阿里通义 (-intl)、Kimi (.ai)、硅基流动 (.com)、MiniMax 海螺 (.io) 与智谱 (Z.ai) 的免国内手机号注册、$1 小额激活与精准接口地址。",
     },
     {
-      path: "docker/docker-compose.yml + litellm_config.yaml",
-      desc: "Self-hosted LiteLLM Proxy + Redis semantic/prompt cache stack for any $6/mo VPS.",
-      descZh: "一键在任意海外 VPS 上拉起 LiteLLM 私有路由网关 + Redis 缓存加速服务。",
+      num: "Chapter 04",
+      title: "Zero-Code Setup for 6 Everyday Apps",
+      titleZh: "第四章：6 款主流工具「零代码」填表即用指南",
+      desc: "Copy-paste setup for Cursor / VS Code (via Cline & Roo Code without breaking Cursor), the hidden native Anthropic URL trick to run Claude Code CLI on Kimi/GLM/MiniMax, plus ChatBox, SillyTavern (1M context), OpenWebUI & n8n.",
+      descZh:
+        "完全不懂编程也能照着填：Cursor/VS Code（不破坏原生功能的插件接法）、Claude Code 原生 /anthropic 接口直连秘籍、ChatBox、SillyTavern 酒馆百万上下文、OpenWebUI 与 n8n 配置。",
+    },
+    {
+      num: "Chapter 05–07",
+      title: "Hailuo & Kling Video APIs + 401/3DS Fix Dictionary + Cheat Sheet",
+      titleZh: "第五至七章：可灵/海螺视频 API 避开 $500 门槛攻略 + 排错字典 + 速查表",
+      desc: "How to generate AI video at ~$0.08/sec without Kling's $500 enterprise deposit, how to fix international card 3D-Secure declines via PayPal, GDPR/ZDR privacy setup, and a 1-click copyable Master Cheat Sheet.",
+      descZh:
+        "如何绕开可灵官方 $500 预充门槛按秒调用视频生成 API、外卡拒付如何用 PayPal 化解、欧美数据隐私保护设置及全模型一键复制速查总表。",
     },
   ];
 
@@ -244,131 +262,126 @@ export function StarterKitSalesView() {
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-12">
-        {/* Left Pitch & File Breakdown */}
+        {/* Left Pitch & Chapter Breakdown */}
         <div className="lg:col-span-7">
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-300">
-            <PackageCheck className="h-3.5 w-3.5" />
-            {t("Developer Production Kit · v1.0", "开发者生产级源码包 · v1.0")}
+            <BookOpenCheck className="h-3.5 w-3.5" />
+            {t(
+              "INTERACTIVE HANDBOOK + PDF + CHEAT SHEET · NOV 2026",
+              "交互式离线电子书 + 可打印 PDF + 速查表 · 2026年11月版"
+            )}
           </div>
 
           <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
             {t(
-              "SwitchCN Multi-LLM Smart Router Starter Kit",
-              "SwitchCN 多模型智能省钱路由代码包"
+              "The China AI Direct API Playbook (2026 Edition)",
+              "中国大模型官方 API 海外直连实战全手册"
             )}
           </h1>
 
           <p className="mt-4 text-base leading-relaxed text-slate-400">
             {t(
-              "Stop hardcoding a single $8/$40 frontier model for every trivial summarize, classify, or CRUD coding prompt. Drop this lightweight router into your Node.js, Next.js, or Python app in 5 minutes and cut 75%–90% off your monthly token bill automatically.",
-              "别再把所有简单的摘要、分类、常规问答都硬编码发给 $8/$40 的昂贵旗舰模型了。只需 5 分钟把这套轻量级路由模块放进你的 Node.js、Next.js 或 Python 项目，全自动砍掉 75%–90% 的月度 API 账单。"
+              "Stop wasting hours hitting Chinese SMS walls, 401 Invalid Key errors, or paying middleman markups. Connect directly to China's top text, coding, and video AI labs from anywhere in the world—even if you don't write a single line of code.",
+              "告别国内手机号实名拦截、401 接口报错与二道贩子加价。无论你是用 Cursor/Claude Code 的开发者，还是用 ChatBox、SillyTavern、n8n 的零代码玩家，都能照着手册 10 分钟直连中国六大官方国际站。"
             )}
           </p>
 
-          {/* Telemetry Preview Terminal */}
-          <div className="mt-7 overflow-hidden rounded-2xl border border-white/[0.08] bg-[#02040a]">
-            <div className="flex items-center gap-1.5 border-b border-white/[0.06] bg-white/[0.02] px-4 py-2.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
-              <span className="ml-3 font-mono text-[11px] text-slate-400">
-                smartRouter.ts — Live Telemetry Output
-              </span>
+          {/* Value Highlight Box */}
+          <div className="mt-6 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.06] p-5">
+            <div className="flex items-start gap-3">
+              <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" />
+              <div className="text-sm leading-relaxed text-slate-200">
+                <strong className="text-emerald-300">
+                  {t(
+                    "Pays for itself in 15 minutes:",
+                    "15 分钟赚回 $15 票价："
+                  )}
+                </strong>{" "}
+                {t(
+                  "Chapter 2 walks you through claiming official international starter token allocations (1,000,000 free tokens per eligible Qwen model + global trial credits) worth more than the price of this guide.",
+                  "手册第 2 章手把手带你领取阿里云百炼国际站等官方赠送的百万级免费 Token 额度，光免费额度价值就已经超过 $20。"
+                )}
+              </div>
             </div>
-            <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-slate-300">
-              <code>{`const res = await smartChatCompletion({
-  messages: [{ role: "user", content: "Extract invoice items into JSON" }],
-  enforceZDR: true, // Forces US/EU Zero Data Retention providers
-});
-
-// Returned automatically on every call:
-{
-  routedModel: "deepseek/deepseek-v4.1-flash",
-  tier: "fast",
-  attempt: 1,
-  actualCostUSD: 0.00019,
-  frontierBaselineCostUSD: 0.00840,
-  savedUSD: 0.00821 // 97.7% saved on this request
-}`}</code>
-            </pre>
           </div>
 
-          {/* Included Files */}
+          {/* Chapters Breakdown */}
           <h2 className="mt-10 font-display text-xl font-bold text-white">
-            {t("Everything Inside the ZIP", "源码压缩包内含完整文件")}
+            {t("What You Get Inside", "手册完整章节一览")}
           </h2>
-          <div className="mt-4 space-y-3">
-            {includedFiles.map((file) => (
-              <SpotlightCard key={file.path} className="p-4">
-                <div className="flex items-start gap-3">
-                  <FileCode2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
-                  <div>
-                    <p className="font-mono text-xs font-bold text-emerald-300">
-                      {file.path}
-                    </p>
-                    <p className="mt-1 text-sm text-slate-400">
-                      {lang === "zh" ? file.descZh : file.desc}
-                    </p>
-                  </div>
-                </div>
+          <div className="mt-4 space-y-3.5">
+            {chapters.map((ch) => (
+              <SpotlightCard key={ch.num} className="p-5">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-400">
+                  {ch.num}
+                </span>
+                <h3 className="mt-1 font-display text-base font-bold text-white">
+                  {lang === "zh" ? ch.titleZh : ch.title}
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
+                  {lang === "zh" ? ch.descZh : ch.desc}
+                </p>
               </SpotlightCard>
             ))}
           </div>
         </div>
 
-        {/* Right Checkout Sticky Card */}
+        {/* Right Sticky Checkout Card */}
         <div className="lg:col-span-5">
           <div className="sticky top-24">
             <BorderBeamCard>
               <div className="flex flex-col justify-between">
                 <div>
                   <span className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">
-                    {t("One-Time Purchase · Lifetime Updates", "一次买断 · 永久免费更新")}
+                    {t(
+                      "Instant Download · Beginner Friendly",
+                      "付款秒发 · 零基础小白友好"
+                    )}
                   </span>
                   <div className="mt-3 flex items-baseline gap-3">
                     <span className="font-mono text-5xl font-extrabold text-white">
-                      ${siteConfig.starterKitPriceUSD}
+                      ${siteConfig.playbookPriceUSD}
                     </span>
                     <span className="text-sm text-slate-400 line-through">
-                      $49
+                      $39
                     </span>
                     <span className="rounded-md bg-emerald-400/15 px-2 py-0.5 font-mono text-xs font-bold text-emerald-300">
-                      {t("LAUNCH PRICE", "首发特惠")}
+                      {t("NOV 2026 EDITION", "2026 最新实测版")}
                     </span>
                   </div>
 
                   <p className="mt-3 text-sm text-slate-400">
                     {t(
-                      "Pays for itself within your first day of production API traffic.",
-                      "上线第一天省下的 API 差价即可回本。"
+                      "Every portal URL and API endpoint live-tested against November 2026 global servers.",
+                      "所有官方海外入口与 API 地址均已完成 2026 年 11 月实机连通核验。"
                     )}
                   </p>
 
                   <ul className="mt-6 space-y-2.5 border-t border-white/[0.07] pt-5 text-sm text-slate-200">
                     {[
                       t(
-                        "TypeScript (Node / Next.js) + Python modules",
-                        "包含 TypeScript（Node / Next.js）与 Python 双语言源码"
+                        "Interactive Offline eBook (.html) with 1-click Copy buttons + Print-to-PDF",
+                        "交互式离线电子书（.html），所有地址一键复制，支持一键导出 PDF"
                       ),
                       t(
-                        "3-tier classifier (Fast / Routine / Frontier)",
-                        "三档零延迟智能分流（极速档 / 常规主力档 / 旗舰攻坚档）"
+                        "6 Official Global Portals (DeepSeek, Qwen, Kimi, SiliconFlow, MiniMax, Z.ai)",
+                        "6 大官方国际站免 +86 手机号注册与外卡/PayPal 充值指南"
                       ),
                       t(
-                        "Automatic 429 & timeout provider failover",
-                        "遇到限流或超时毫秒级自动无感切换备用模型"
+                        "Official Free Token Quota Harvester ($20+ value)",
+                        "官方新户百万级免费 Token 领取与防超支扣费教程"
                       ),
                       t(
-                        "US/EU Zero Data Retention (ZDR) pre-wired",
-                        "预置欧美节点零数据留存（ZDR）隐私保护参数"
+                        "Zero-code setup for Cursor/Cline, Claude Code, ChatBox, SillyTavern & n8n",
+                        "Cursor/Cline、Claude Code、ChatBox、酒馆与 n8n 零代码填表教程"
                       ),
                       t(
-                        "Docker Compose LiteLLM + Redis cache stack",
-                        "附赠 Docker 一键私有化部署 LiteLLM + Redis 缓存配置"
+                        "Hailuo & Kling AI Video API guide (skip $500 deposits)",
+                        "海螺与可灵 AI 视频 API 按秒低价接入攻略（避开 $500 预充门槛）"
                       ),
                       t(
-                        "Unlimited commercial & client projects license",
-                        "不限商业项目与客户外包项目使用授权"
+                        "Markdown Quick-Copy Endpoint Cheat Sheet included",
+                        "附赠 Markdown 全接口与模型 ID 速查卡（可直接导入 Notion）"
                       ),
                     ].map((benefit) => (
                       <li key={benefit} className="flex items-start gap-2.5">
@@ -382,15 +395,15 @@ export function StarterKitSalesView() {
                 <div className="mt-7 space-y-3">
                   {hasCheckout ? (
                     <a
-                      href={siteConfig.starterKitCheckoutUrl}
+                      href={siteConfig.playbookCheckoutUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-3.5 text-sm font-bold text-slate-950 shadow-[0_0_32px_-6px_rgba(16,185,129,0.8)] transition hover:shadow-[0_0_42px_-4px_rgba(34,211,238,0.9)]"
                     >
                       <Zap className="h-4 w-4" />
                       {t(
-                        `Buy Now & Download ZIP — $${siteConfig.starterKitPriceUSD}`,
-                        `立即购买并下载源码包 — $${siteConfig.starterKitPriceUSD}`
+                        `Buy & Download Instant Playbook — $${siteConfig.playbookPriceUSD}`,
+                        `立即购买并下载完整手册 — $${siteConfig.playbookPriceUSD}`
                       )}
                     </a>
                   ) : (
@@ -402,18 +415,18 @@ export function StarterKitSalesView() {
                       >
                         <Zap className="h-4 w-4" />
                         {t(
-                          `Get Instant Access — $${siteConfig.starterKitPriceUSD}`,
-                          `立即获取完整源码包 — $${siteConfig.starterKitPriceUSD}`
+                          `Download Complete Playbook — $${siteConfig.playbookPriceUSD}`,
+                          `立即获取完整实战手册 — $${siteConfig.playbookPriceUSD}`
                         )}
                       </button>
                       {showPendingNotice && (
                         <div className="rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-3.5 text-xs leading-relaxed text-emerald-100">
                           {t(
-                            "Checkout gateway is finalizing verification. Click below to request your instant purchase link via email:",
-                            "在线收银台正在激活中，点击下方邮件即可优先获取购买链接与源码包："
+                            "Instant checkout is finalizing verification. Click below to grab your copy directly:",
+                            "在线自动发货通道正在激活中，点击下方邮件即可直接获取手册："
                           )}
                           <a
-                            href={`mailto:${siteConfig.contactEmail}?subject=Order%20SwitchCN%20Smart%20Router%20Kit%20($19)`}
+                            href={`mailto:${siteConfig.contactEmail}?subject=Order%20China%20AI%20Direct%20API%20Playbook%20($15)`}
                             className="mt-2 block font-mono font-bold text-emerald-300 underline"
                           >
                             {siteConfig.contactEmail} →
@@ -436,7 +449,6 @@ export function StarterKitSalesView() {
         </div>
       </div>
 
-      {/* Also show VPS hosting recommendations for deploying the Docker stack */}
       <AffiliateInfraSection />
     </div>
   );

@@ -7,17 +7,15 @@ export const siteConfig = {
   url: "https://china-ai-calc.kkko9028.workers.dev",
   lastUpdated: "November 27, 2026",
 
-  // === C. 免费访客统计 (Cloudflare Web Analytics) ===
-  // 在 Cloudflare 左侧「分析与日志 -> Web Analytics」添加站点后，把生成的 token 填在下面即可生效
+  // === C. 免费访客统计 (Cloudflare Web Analytics — 已激活) ===
   cloudflareAnalyticsToken: "804b369bb95a489285edba8fbb3438f4",
 
-  // === A. $19 自营数字产品收款 (Creem — 支持身份证注册 + 支付宝提现) ===
-  // 在 https://www.creem.io 上传 switchcn-smart-router-kit-v1.zip 后，把生成的 Checkout 购买链接粘贴到这里
-  starterKitPriceUSD: 19,
-  starterKitCheckoutUrl: "",
+  // === A. $15 付费教程《China AI Direct API Playbook》收款链接 (Creem — 支付宝提现) ===
+  // 在 https://www.creem.io 上传 china-ai-direct-api-playbook-v1.zip 后，把生成的 Checkout 链接粘贴到这里
+  playbookPriceUSD: 15,
+  playbookCheckoutUrl: "",
 
   // === B. 海外云与 GPU 联盟返佣链接 (Affiliate Links — 支持 PayPal 现金提现) ===
-  // 申请通过后把下面的默认官网链接替换成你的专属推广链接（如 https://www.vultr.com/?ref=XXXXXX）
   affiliates: {
     vultrUrl: "https://www.vultr.com/products/cloud-gpu/",
     digitalOceanUrl: "https://www.digitalocean.com/products/gpu-droplets",

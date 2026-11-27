@@ -35,7 +35,7 @@ import {
 } from "@/components/ConversionSections";
 import {
   AffiliateInfraSection,
-  StarterKitPromoBanner,
+  PlaybookPromoBanner,
 } from "@/components/MonetizationBlocks";
 import { AdSlot } from "@/components/AdSlot";
 import {
@@ -183,7 +183,7 @@ export function HomeView() {
       {/* Calculator */}
       <FadeInSection>
         <SavingsCalculator />
-        <StarterKitPromoBanner />
+        <PlaybookPromoBanner />
       </FadeInSection>
 
       {/* Real-time AI & LLM News Wire */}
@@ -866,7 +866,7 @@ export function ModelGuideView({ model }: { model: AIModel }) {
 
       <SavingsCalculator defaultFromId="gpt-6.2-astra" defaultToId={model.id} />
 
-      <StarterKitPromoBanner />
+      <PlaybookPromoBanner />
 
       <AffiliateInfraSection />
 
