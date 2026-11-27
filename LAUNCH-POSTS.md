@@ -1,6 +1,6 @@
 # 上线首日引流发帖文案（直接复制使用）
 
-> 部署拿到 Vercel (`https://xxx.vercel.app`) 或正式域名后，把下面文案里的 `[YOUR_LIVE_URL]` 换成你的真实网址即可发帖。
+> 部署拿到 Vercel (`https://xxx.vercel.app`) 或正式域名后，把下面文案里的 `https://china-ai-calc.kkko9028.workers.dev` 换成你的真实网址即可发帖。
 > **最佳发帖时机**：现在到 12 月 1 日前后（正好踩中 Gemini 4 Carbon 首发优惠到期价格翻倍的热点）。
 
 ---
@@ -15,7 +15,7 @@ Hey folks,
 
 Since Google's intro promo for Gemini 4 Carbon expires Nov 30 (jumping from $2/$10 to $4/$20 per 1M tokens) and GPT-6.2 Astra / Claude Fable 5.2 sit at $8/$40, I put together a clean client-side calculator to check how much different workloads actually save when routing routine traffic to open-weight / Chinese frontier models:
 
-Live tool: [YOUR_LIVE_URL]
+Live tool: https://china-ai-calc.kkko9028.workers.dev
 
 What it covers:
 - **Real prompt-caching math**: Slider from 0% to 90% cache hit rate (makes a massive difference for coding agent loops where Qwen 4 Max cached reads are $0.071/M and DeepSeek V4.1 Flash is $0.04/M).
@@ -33,7 +33,7 @@ Zero signups, 100% client-side. Let me know if any provider rates or new Novembe
 I built a free LLM API savings calculator + global setup guide for indie hackers burning too much on OpenAI/Anthropic tokens
 
 **Body:**
-Link: [YOUR_LIVE_URL]
+Link: https://china-ai-calc.kkko9028.workers.dev
 
 If you're running a flat-rate $19-$29/mo AI SaaS, paying $8/$40 per million tokens on GPT-6.2 Astra or Claude 5.2 eats your gross margin fast.
 
@@ -51,7 +51,7 @@ Gemini 4 Carbon API pricing doubles on Dec 1 ($2/$10 → $4/$20), while GPT-6.2 
 
 Built a live Nov 2026 LLM cost calculator (with Prompt Cache math + 2-line global ZDR setup for DeepSeek V4, Qwen 4 Max & Kimi K3.1 — no China phone needed):
 
-[YOUR_LIVE_URL]
+https://china-ai-calc.kkko9028.workers.dev
 
 ---
 
@@ -61,4 +61,4 @@ Built a live Nov 2026 LLM cost calculator (with Prompt Cache math + 2-line globa
 Show HN: SwitchCN – LLM API cost & prompt-cache calculator (US vs. Chinese open-weight models)
 
 **URL:**
-[YOUR_LIVE_URL]
+https://china-ai-calc.kkko9028.workers.dev
