@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DevStatusBadge } from "@/components/DevStatusBadge";
+import { ContactFloatingWidget } from "@/components/ContactFloatingWidget";
 import { AmbientBackground } from "@/components/ui/TechPrimitives";
 import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
@@ -49,6 +50,7 @@ export default function RootLayout({
           <Navbar />
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />
+          <ContactFloatingWidget />
           <DevStatusBadge />
         </LanguageProvider>
         {siteConfig.cloudflareAnalyticsToken ? (
