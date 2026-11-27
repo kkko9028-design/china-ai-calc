@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Calculate how much you save switching from GPT-6.2, Claude 5.2, or Gemini 4 to DeepSeek V4, Qwen 4 Max, and Kimi K3.1. Includes no-China-phone global API guides & drop-in OpenAI SDK code.",
   // 绑定独立域名后改成你的正式域名（不要带结尾斜杠，Creem 提交审核前必须绑定独立域名）
-  url: "https://china-ai-calc.kkko9028.workers.dev",
+  url: "https://xingyuhaha.top",
   lastUpdated: "November 27, 2026",
 
   // === C. 免费访客统计 (Cloudflare Web Analytics — 已激活) ===
