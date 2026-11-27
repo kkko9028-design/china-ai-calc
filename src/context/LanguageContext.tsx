@@ -51,6 +51,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       if (saved === "zh" || saved === "en") {
         setLangState(saved);
         document.documentElement.lang = saved === "zh" ? "zh-CN" : "en";
+      } else if (
+        typeof navigator !== "undefined" &&
+        navigator.language?.toLowerCase().startsWith("zh")
+      ) {
+        setLangState("zh");
+        document.documentElement.lang = "zh-CN";
       }
     } catch {
       // ignore storage errors

@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     type: "website",
   },
+  other: {
+    google: "notranslate",
+  },
 };
 
 export default function RootLayout({
@@ -43,8 +46,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="relative flex min-h-screen flex-col bg-[#030712] font-sans text-slate-100">
+    <html lang="en" translate="no" className="notranslate">
+      <head>
+        <meta name="google" content="notranslate" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){if(typeof Node==="function"&&Node.prototype){var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c&&c.parentNode!==this){return c;}return r.apply(this,arguments);};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this){return n;}return i.apply(this,arguments);};}})();`,
+          }}
+        />
+      </head>
+      <body className="notranslate relative flex min-h-screen flex-col bg-[#030712] font-sans text-slate-100">
         <LanguageProvider>
           <AmbientBackground />
           <Navbar />
