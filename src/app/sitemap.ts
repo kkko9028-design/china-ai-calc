@@ -1,0 +1,37 @@
+import type { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
+import { CHINA_MODELS, getAllComparisonPairs } from "@/data/models";
+
+export const dynamic = "force-static";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  const base = siteConfig.url;
+
+  const modelRoutes: MetadataRoute.Sitemap = CHINA_MODELS.map((m) => ({
+    url: `${base}/models/${m.slug}/`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.9,
+  }));
+
+  const compareRoutes: MetadataRoute.Sitemap = getAllComparisonPairs().map(
+    (pair) => ({
+      url: `${base}/compare/${pair.slug}/`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    })
+  );
+
+  return [
+    {
+      url: `${base}/`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 1.0,
+    },
+    ...modelRoutes,
+    ...compareRoutes,
+  ];
+}

@@ -1,0 +1,57 @@
+import type { Metadata } from "next";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/jetbrains-mono";
+import { siteConfig } from "@/config/site";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { DevStatusBadge } from "@/components/DevStatusBadge";
+import { AmbientBackground } from "@/components/ui/TechPrimitives";
+import { LanguageProvider } from "@/context/LanguageContext";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "China AI API pricing",
+    "DeepSeek V4 Pro pricing",
+    "Qwen 4 Max API outside China",
+    "Kimi K3.1 Pro API pricing",
+    "GPT-6.2 vs DeepSeek",
+    "Claude 5.2 vs Qwen 4 Max",
+    "LLM API cost calculator 2026",
+    "Gemini 4 Carbon price increase",
+  ],
+  openGraph: {
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className="relative flex min-h-screen flex-col bg-[#030712] font-sans text-slate-100">
+        <LanguageProvider>
+          <AmbientBackground />
+          <Navbar />
+          <main className="relative z-10 flex-1">{children}</main>
+          <Footer />
+          <DevStatusBadge />
+        </LanguageProvider>
+      </body>
+    </html>
+  );
+}
