@@ -9,7 +9,7 @@ export const siteConfig = {
 
   // === C. 免费访客统计 (Cloudflare Web Analytics) ===
   // 在 Cloudflare 左侧「分析与日志 -> Web Analytics」添加站点后，把生成的 token 填在下面即可生效
-  cloudflareAnalyticsToken: "",
+  cloudflareAnalyticsToken: "804b369bb95a489285edba8fbb3438f4",
 
   // === A. $19 自营数字产品收款 (Creem — 支持身份证注册 + 支付宝提现) ===
   // 在 https://www.creem.io 上传 switchcn-smart-router-kit-v1.zip 后，把生成的 Checkout 购买链接粘贴到这里
