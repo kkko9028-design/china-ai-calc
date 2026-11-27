@@ -134,7 +134,11 @@ export function AnimatedUSD({
       ? `${sign}$${abs.toFixed(2)}`
       : `${sign}$${abs.toFixed(3)}`;
 
-  return <span className={className}>{formatted}</span>;
+  return (
+    <span translate="no" className={`notranslate ${className}`}>
+      {formatted}
+    </span>
+  );
 }
 
 /**

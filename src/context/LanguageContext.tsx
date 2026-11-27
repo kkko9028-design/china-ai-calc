@@ -24,6 +24,28 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
+    // Shield React 18/19 against Chrome / Edge auto-translate DOM mutations (<font> wrapping)
+    if (typeof Node === "function" && Node.prototype) {
+      const origRemoveChild = Node.prototype.removeChild;
+      Node.prototype.removeChild = function <T extends Node>(child: T): T {
+        if (child.parentNode !== this) {
+          return child;
+        }
+        return origRemoveChild.call(this, child) as T;
+      };
+
+      const origInsertBefore = Node.prototype.insertBefore;
+      Node.prototype.insertBefore = function <T extends Node>(
+        newNode: T,
+        referenceNode: Node | null
+      ): T {
+        if (referenceNode && referenceNode.parentNode !== this) {
+          return newNode;
+        }
+        return origInsertBefore.call(this, newNode, referenceNode) as T;
+      };
+    }
+
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved === "zh" || saved === "en") {
