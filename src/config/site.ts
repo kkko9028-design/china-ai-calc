@@ -9,6 +9,8 @@ export const siteConfig = {
 
   // === C. 免费访客统计 (Cloudflare Web Analytics — 已激活) ===
   cloudflareAnalyticsToken: "804b369bb95a489285edba8fbb3438f4",
+  // 可选：Microsoft Clarity 项目 ID（免费看实时访客数 + 访客鼠标录屏回放与点击热力图）
+  clarityProjectId: "",
 
   // === A. $15 付费教程《China AI Direct API Playbook》收银配置 ===
   // 推荐方式（全自动服务端验单防白嫖发货）：在 Cloudflare Worker「设置 -> 变量和机密」添加 CREEM_API_KEY、CREEM_PRODUCT_ID、PLAYBOOK_SECRET_KEY
