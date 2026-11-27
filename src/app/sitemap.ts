@@ -24,6 +24,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const legalRoutes: MetadataRoute.Sitemap = [
+    "/terms/",
+    "/privacy/",
+    "/refund/",
+  ].map((p) => ({
+    url: `${base}${p}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.4,
+  }));
+
   return [
     {
       url: `${base}/`,
@@ -39,5 +50,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...modelRoutes,
     ...compareRoutes,
+    ...legalRoutes,
   ];
 }

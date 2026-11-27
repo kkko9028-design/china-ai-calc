@@ -9,7 +9,7 @@ import {
   CheckCircle2,
   Cpu,
   ExternalLink,
-  Gift,
+  Loader2,
   Server,
   ShieldCheck,
   Sparkles,
@@ -38,7 +38,7 @@ export function PlaybookPromoBanner() {
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-300">
-              <Gift className="h-3.5 w-3.5" />
+              <BookOpenCheck className="h-3.5 w-3.5" />
               {t(
                 `STEP-BY-STEP FIELD MANUAL · $${siteConfig.playbookPriceUSD} ONE-TIME`,
                 `保姆级直连实战手册 · $${siteConfig.playbookPriceUSD} 一次买断`
@@ -46,14 +46,14 @@ export function PlaybookPromoBanner() {
             </div>
             <h3 className="mt-3 font-display text-xl font-bold text-white sm:text-2xl">
               {t(
-                "Want direct wholesale rates + $20+ in official free token quotas?",
-                "想绕开中间商拿官方底价，并领满 $20+ 官方新户免费 Token 额度？"
+                "Want direct international API setup + official starter token quotas?",
+                "想用国际卡直接开通中国六大官方国际站，并领取新户免费额度？"
               )}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-slate-400">
               {t(
-                "Get The China AI Direct API Playbook (2026 Edition): step-by-step account setup across all 6 official international portals (no +86 phone, no Alipay), how to claim 1M+ free Qwen tokens per model, zero-code setup for Cursor, Claude Code, ChatBox & SillyTavern, plus Hailuo/Kling video API access without $500 deposits.",
-                "获取《2026 中国大模型官方直连实战全手册》：手把手教你免 +86 手机号、用外卡/PayPal 开通 6 大官方国际站，白嫖百万级官方免费额度（当天赚回教程费），零代码填入 Cursor、Claude Code、ChatBox、酒馆 SillyTavern 与 n8n，并附带海螺/可灵视频 API 避开 $500 预充门槛攻略。"
+                "Get The China AI Direct API Playbook (2026 Edition): verified onboarding across all 6 official international portals (standard Visa/Mastercard/PayPal, no +86 phone needed), how to activate official starter token quotas, zero-code setup for Cursor/Cline, Claude Code, ChatBox & SillyTavern, plus pay-as-you-go Hailuo/Kling video API guides.",
+                "获取《2026 中国大模型官方直连实战全手册》：覆盖 6 大官方国际站开户与国际卡/PayPal 充值指南（无需 +86 手机号）、官方新户免费试用额度开启方法，以及零代码配置 Cursor/Cline、Claude Code、ChatBox、SillyTavern 与按秒计费视频 API 全流程。"
               )}
             </p>
           </div>
@@ -64,15 +64,15 @@ export function PlaybookPromoBanner() {
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-3 text-sm font-bold text-slate-950 shadow-[0_0_28px_-6px_rgba(16,185,129,0.75)] transition hover:shadow-[0_0_38px_-4px_rgba(34,211,238,0.85)]"
             >
               {t(
-                `Get the Direct API Playbook — $${siteConfig.playbookPriceUSD}`,
+                `View Playbook Details — $${siteConfig.playbookPriceUSD}`,
                 `查看实战手册详情 — $${siteConfig.playbookPriceUSD}`
               )}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <span className="text-center font-mono text-[11px] text-slate-500">
               {t(
-                "No coding required · Recoup $15 via free quotas",
-                "零代码小白友好 · 领完免费额度当天回本"
+                "No coding required · Instant ZIP download",
+                "零基础友好 · 付款后即时解锁 ZIP 下载"
               )}
             </span>
           </div>
@@ -204,50 +204,81 @@ export function AffiliateInfraSection() {
  */
 export function PlaybookSalesView() {
   const { lang, t } = useLanguage();
-  const [showPendingNotice, setShowPendingNotice] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [fallbackNotice, setFallbackNotice] = useState(false);
 
-  const hasCheckout = Boolean(siteConfig.playbookCheckoutUrl.trim());
+  const handleBuyClick = async () => {
+    setCheckoutLoading(true);
+    setFallbackNotice(false);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (res.ok) {
+        const data = (await res.json()) as { checkoutUrl?: string };
+        if (data.checkoutUrl) {
+          window.location.href = data.checkoutUrl;
+          return;
+        }
+      }
+      // Fall back to static checkout link if configured
+      if (siteConfig.playbookCheckoutUrl.trim()) {
+        window.location.href = siteConfig.playbookCheckoutUrl.trim();
+        return;
+      }
+      setFallbackNotice(true);
+    } catch {
+      if (siteConfig.playbookCheckoutUrl.trim()) {
+        window.location.href = siteConfig.playbookCheckoutUrl.trim();
+        return;
+      }
+      setFallbackNotice(true);
+    } finally {
+      setCheckoutLoading(false);
+    }
+  };
 
   const chapters = [
     {
       num: "Chapter 01",
-      title: "The Domestic (.cn) vs. Global Portal Trap",
-      titleZh: "第一章：避开 90% 老外必踩的「国内站 .cn vs 国际站」大坑",
-      desc: "Why 90% of English tutorials give you the wrong base_url causing instant 401 errors—and the 30-second decision matrix for picking the exact right portal.",
+      title: "Understanding Domestic (.cn) vs. International Portals",
+      titleZh: "第一章：厘清「国内站 .cn」与「海外国际站」两套隔离体系",
+      desc: "Why mixing domestic and international endpoints triggers 401 authentication errors—plus a 30-second decision matrix to pick the right portal for your region and privacy needs.",
       descZh:
-        "为什么网上搜到的教程总报 401 密钥无效？一张表看清两套隔离账号体系与 30 秒选型决策。",
+        "为什么混用国内外端点会直接报 401 鉴权失败？附 30 秒选型决策表，按所在地区与隐私需求快速选对官方入口。",
     },
     {
       num: "Chapter 02",
-      title: "The Free Token Quota Harvester ($20+ Value)",
-      titleZh: "第二章：官方新户免费百万 Token 额度领取清单（价值超 $20）",
-      desc: "Exact steps to activate Alibaba Cloud Model Studio (Singapore) for 1,000,000 free tokens per Qwen model—plus how to lock 'Free Quota Only' so you never get surprise charges.",
+      title: "Activating Official International Starter Token Quotas",
+      titleZh: "第二章：官方国际站新户免费试用 Token 额度开启指南",
+      desc: "Step-by-step instructions to activate international developer starter allocations on Alibaba Cloud Model Studio (Singapore scope) and configure 'Free Quota Only' billing alerts.",
       descZh:
-        "手把手激活阿里云百炼国际站（新加坡节点）领取每模型 100 万免费额度，并开启防超支扣费保护开关，买完教程当天回本。",
+        "手把手演示如何在阿里云百炼国际站（新加坡地域）激活新户每模型百万级免费试用额度，并设置「仅使用免费额度」防超支保护。",
     },
     {
       num: "Chapter 03",
-      title: "All 6 Official International Portals (No +86 Phone)",
-      titleZh: "第三章：6 大中国厂商官方国际站开户与外卡充值全流程",
-      desc: "Verified portals, Visa/Mastercard/PayPal top-up walkthroughs ($1–$5 minimums), and exact endpoints for DeepSeek, Alibaba Qwen (-intl), Moonshot Kimi (.ai), SiliconFlow (.com), MiniMax (.io), and Zhipu (Z.ai).",
+      title: "All 6 Official International Portals (Standard Card & PayPal)",
+      titleZh: "第三章：6 大官方国际站注册与国际卡 / PayPal 充值流程",
+      desc: "Verified global portals, billing walkthroughs, and exact endpoints for DeepSeek, Alibaba Qwen (-intl), Moonshot Kimi (.ai), SiliconFlow (.com), MiniMax (.io), and Zhipu (Z.ai)—using standard international cards or PayPal.",
       descZh:
-        "覆盖 DeepSeek、阿里通义 (-intl)、Kimi (.ai)、硅基流动 (.com)、MiniMax 海螺 (.io) 与智谱 (Z.ai) 的免国内手机号注册、$1 小额激活与精准接口地址。",
+        "覆盖 DeepSeek、阿里通义 (-intl)、Kimi (.ai)、硅基流动 (.com)、MiniMax 海螺 (.io) 与智谱 (Z.ai) 的海外邮箱登录、小额充值激活与精确接口地址。",
     },
     {
       num: "Chapter 04",
-      title: "Zero-Code Setup for 6 Everyday Apps",
-      titleZh: "第四章：6 款主流工具「零代码」填表即用指南",
-      desc: "Copy-paste setup for Cursor / VS Code (via Cline & Roo Code without breaking Cursor), the hidden native Anthropic URL trick to run Claude Code CLI on Kimi/GLM/MiniMax, plus ChatBox, SillyTavern (1M context), OpenWebUI & n8n.",
+      title: "Zero-Code Configuration for 6 Popular Apps",
+      titleZh: "第四章：6 款常用客户端与自动化软件「零代码」配置步骤",
+      desc: "Copy-paste setup for Cursor / VS Code (via Cline & Roo Code extensions), native Anthropic-compatible endpoint configuration for Claude Code CLI, plus ChatBox, SillyTavern, OpenWebUI & n8n.",
       descZh:
-        "完全不懂编程也能照着填：Cursor/VS Code（不破坏原生功能的插件接法）、Claude Code 原生 /anthropic 接口直连秘籍、ChatBox、SillyTavern 酒馆百万上下文、OpenWebUI 与 n8n 配置。",
+        "无需编写代码，照着填表即可接入：Cursor/VS Code（Cline & Roo Code 插件配置）、Claude Code 原生 /anthropic 兼容端点配置、ChatBox、SillyTavern、OpenWebUI 与 n8n。",
     },
     {
       num: "Chapter 05–07",
-      title: "Hailuo & Kling Video APIs + 401/3DS Fix Dictionary + Cheat Sheet",
-      titleZh: "第五至七章：可灵/海螺视频 API 避开 $500 门槛攻略 + 排错字典 + 速查表",
-      desc: "How to generate AI video at ~$0.08/sec without Kling's $500 enterprise deposit, how to fix international card 3D-Secure declines via PayPal, GDPR/ZDR privacy setup, and a 1-click copyable Master Cheat Sheet.",
+      title: "Hailuo & Kling Video APIs + Troubleshooting + Master Cheat Sheet",
+      titleZh: "第五至七章：海螺与可灵视频 API 指南 + 常见报错排查 + 全接口速查表",
+      desc: "Comparison of official direct vs. pay-as-you-go per-second routes for Hailuo 03, Kling, and Wan video generation, solutions for 401/429/3DS card errors, GDPR/ZDR privacy settings, and a 1-click copyable endpoint table.",
       descZh:
-        "如何绕开可灵官方 $500 预充门槛按秒调用视频生成 API、外卡拒付如何用 PayPal 化解、欧美数据隐私保护设置及全模型一键复制速查总表。",
+        "海螺、可灵与通义万相视频生成 API 的官方直连与按秒计费渠道对比，401/429 及国际卡 3DS 支付失败排查方案，欧美零数据留存（ZDR）隐私设置，以及一键复制速查总表。",
     },
   ];
 
@@ -267,8 +298,8 @@ export function PlaybookSalesView() {
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-300">
             <BookOpenCheck className="h-3.5 w-3.5" />
             {t(
-              "INTERACTIVE HANDBOOK + PDF + CHEAT SHEET · NOV 2026",
-              "交互式离线电子书 + 可打印 PDF + 速查表 · 2026年11月版"
+              "INTERACTIVE OFFLINE HANDBOOK + CHEAT SHEET · NOV 2026",
+              "交互式离线电子手册 + 速查表 · 2026年11月实测版"
             )}
           </div>
 
@@ -281,8 +312,8 @@ export function PlaybookSalesView() {
 
           <p className="mt-4 text-base leading-relaxed text-slate-400">
             {t(
-              "Stop wasting hours hitting Chinese SMS walls, 401 Invalid Key errors, or paying middleman markups. Connect directly to China's top text, coding, and video AI labs from anywhere in the world—even if you don't write a single line of code.",
-              "告别国内手机号实名拦截、401 接口报错与二道贩子加价。无论你是用 Cursor/Claude Code 的开发者，还是用 ChatBox、SillyTavern、n8n 的零代码玩家，都能照着手册 10 分钟直连中国六大官方国际站。"
+              "A clear, verified field manual for global developers and creators to set up official international accounts across China's leading text, coding, and video AI platforms—using standard email sign-up and Visa, Mastercard, or PayPal.",
+              "专为海外开发者与创作者编写的实测配置手册：无需中国大陆手机号或支付宝，使用普通邮箱与国际信用卡 / PayPal 即可开通中国六大主流大模型与视频官方国际平台。"
             )}
           </p>
 
@@ -293,13 +324,13 @@ export function PlaybookSalesView() {
               <div className="text-sm leading-relaxed text-slate-200">
                 <strong className="text-emerald-300">
                   {t(
-                    "Pays for itself in 15 minutes:",
-                    "15 分钟赚回 $15 票价："
+                    "Live-Verified Endpoints (Nov 2026):",
+                    "2026 年 11 月实机连通核验："
                   )}
                 </strong>{" "}
                 {t(
-                  "Chapter 2 walks you through claiming official international starter token allocations (1,000,000 free tokens per eligible Qwen model + global trial credits) worth more than the price of this guide.",
-                  "手册第 2 章手把手带你领取阿里云百炼国际站等官方赠送的百万级免费 Token 额度，光免费额度价值就已经超过 $20。"
+                  "Every international console link, OpenAI-compatible base_url, and Anthropic-compatible CLI endpoint in this manual has been verified against live global servers, with 1-click copy buttons and Print-to-PDF support.",
+                  "手册内的每一个国际站控制台链接、OpenAI 兼容接口与 Claude Code 兼容地址均已完成实机连通验证，内置一键复制按钮并支持随时打印导出为 PDF。"
                 )}
               </div>
             </div>
@@ -334,26 +365,23 @@ export function PlaybookSalesView() {
                 <div>
                   <span className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">
                     {t(
-                      "Instant Download · Beginner Friendly",
-                      "付款秒发 · 零基础小白友好"
+                      "One-Time Purchase · Instant Digital Delivery",
+                      "一次买断 · 付款后即时解锁下载"
                     )}
                   </span>
                   <div className="mt-3 flex items-baseline gap-3">
                     <span className="font-mono text-5xl font-extrabold text-white">
                       ${siteConfig.playbookPriceUSD}
                     </span>
-                    <span className="text-sm text-slate-400 line-through">
-                      $39
-                    </span>
-                    <span className="rounded-md bg-emerald-400/15 px-2 py-0.5 font-mono text-xs font-bold text-emerald-300">
-                      {t("NOV 2026 EDITION", "2026 最新实测版")}
+                    <span className="font-mono text-xs uppercase text-slate-400">
+                      USD
                     </span>
                   </div>
 
                   <p className="mt-3 text-sm text-slate-400">
                     {t(
-                      "Every portal URL and API endpoint live-tested against November 2026 global servers.",
-                      "所有官方海外入口与 API 地址均已完成 2026 年 11 月实机连通核验。"
+                      "Complete ZIP download containing the interactive offline HTML handbook (Print-to-PDF ready) + Markdown Quick-Copy Cheat Sheet.",
+                      "购买后当场下载完整 ZIP 压缩包（内含可离线阅读与导出 PDF 的交互式电子书 + Markdown 全接口速查卡）。"
                     )}
                   </p>
 
@@ -364,24 +392,24 @@ export function PlaybookSalesView() {
                         "交互式离线电子书（.html），所有地址一键复制，支持一键导出 PDF"
                       ),
                       t(
-                        "6 Official Global Portals (DeepSeek, Qwen, Kimi, SiliconFlow, MiniMax, Z.ai)",
-                        "6 大官方国际站免 +86 手机号注册与外卡/PayPal 充值指南"
+                        "6 Official International Portals (DeepSeek, Qwen, Kimi, SiliconFlow, MiniMax, Z.ai)",
+                        "6 大官方国际站邮箱注册与国际卡 / PayPal 充值指南"
                       ),
                       t(
-                        "Official Free Token Quota Harvester ($20+ value)",
-                        "官方新户百万级免费 Token 领取与防超支扣费教程"
+                        "Official International Starter Token Quota Setup & Billing Alerts",
+                        "官方国际站新户免费试用额度开启与防超支账单告警设置"
                       ),
                       t(
                         "Zero-code setup for Cursor/Cline, Claude Code, ChatBox, SillyTavern & n8n",
                         "Cursor/Cline、Claude Code、ChatBox、酒馆与 n8n 零代码填表教程"
                       ),
                       t(
-                        "Hailuo & Kling AI Video API guide (skip $500 deposits)",
-                        "海螺与可灵 AI 视频 API 按秒低价接入攻略（避开 $500 预充门槛）"
+                        "Hailuo, Kling & Wan AI Video API per-second access comparison",
+                        "海螺、可灵与万相 AI 视频 API 官方与按秒计费接入对比"
                       ),
                       t(
-                        "Markdown Quick-Copy Endpoint Cheat Sheet included",
-                        "附赠 Markdown 全接口与模型 ID 速查卡（可直接导入 Notion）"
+                        "Responsive email support (" + siteConfig.contactEmail + ")",
+                        "提供专属售后邮件技术支持 (" + siteConfig.contactEmail + ")"
                       ),
                     ].map((benefit) => (
                       <li key={benefit} className="flex items-start gap-2.5">
@@ -393,54 +421,56 @@ export function PlaybookSalesView() {
                 </div>
 
                 <div className="mt-7 space-y-3">
-                  {hasCheckout ? (
-                    <a
-                      href={siteConfig.playbookCheckoutUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-3.5 text-sm font-bold text-slate-950 shadow-[0_0_32px_-6px_rgba(16,185,129,0.8)] transition hover:shadow-[0_0_42px_-4px_rgba(34,211,238,0.9)]"
-                    >
-                      <Zap className="h-4 w-4" />
-                      {t(
-                        `Buy & Download Instant Playbook — $${siteConfig.playbookPriceUSD}`,
-                        `立即购买并下载完整手册 — $${siteConfig.playbookPriceUSD}`
-                      )}
-                    </a>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => setShowPendingNotice(true)}
-                        className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-3.5 text-sm font-bold text-slate-950 shadow-[0_0_32px_-6px_rgba(16,185,129,0.8)] transition hover:shadow-[0_0_42px_-4px_rgba(34,211,238,0.9)]"
-                      >
+                  <button
+                    type="button"
+                    onClick={handleBuyClick}
+                    disabled={checkoutLoading}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-3.5 text-sm font-bold text-slate-950 shadow-[0_0_32px_-6px_rgba(16,185,129,0.8)] transition hover:shadow-[0_0_42px_-4px_rgba(34,211,238,0.9)] disabled:opacity-60"
+                  >
+                    {checkoutLoading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        {t("Opening Secure Checkout...", "正在打开安全收银台...")}
+                      </>
+                    ) : (
+                      <>
                         <Zap className="h-4 w-4" />
                         {t(
-                          `Download Complete Playbook — $${siteConfig.playbookPriceUSD}`,
-                          `立即获取完整实战手册 — $${siteConfig.playbookPriceUSD}`
+                          `Buy Now & Instant Download — $${siteConfig.playbookPriceUSD}`,
+                          `立即购买并即时下载 — $${siteConfig.playbookPriceUSD}`
                         )}
-                      </button>
-                      {showPendingNotice && (
-                        <div className="rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-3.5 text-xs leading-relaxed text-emerald-100">
-                          {t(
-                            "Instant checkout is finalizing verification. Click below to grab your copy directly:",
-                            "在线自动发货通道正在激活中，点击下方邮件即可直接获取手册："
-                          )}
-                          <a
-                            href={`mailto:${siteConfig.contactEmail}?subject=Order%20China%20AI%20Direct%20API%20Playbook%20($15)`}
-                            className="mt-2 block font-mono font-bold text-emerald-300 underline"
-                          >
-                            {siteConfig.contactEmail} →
-                          </a>
-                        </div>
+                      </>
+                    )}
+                  </button>
+
+                  {fallbackNotice && (
+                    <div className="rounded-xl border border-emerald-400/30 bg-emerald-400/10 p-3.5 text-xs leading-relaxed text-emerald-100">
+                      {t(
+                        "Online card checkout is completing merchant activation. Email us below to receive a direct payment & download link:",
+                        "在线收银通道正在完成商户激活配置，您可直接发送邮件获取购买链接："
                       )}
-                    </>
+                      <a
+                        href={`mailto:${siteConfig.contactEmail}?subject=Purchase%20China%20AI%20Direct%20API%20Playbook%20($15)`}
+                        className="mt-1.5 block font-mono font-bold text-emerald-300 underline"
+                      >
+                        {siteConfig.contactEmail} →
+                      </a>
+                    </div>
                   )}
 
-                  <p className="text-center font-mono text-[11px] text-slate-500">
+                  <p className="text-center text-[11px] leading-relaxed text-slate-500">
                     {t(
-                      "Secure global checkout · Visa / Mastercard / Apple Pay",
-                      "支持全球主流银行卡与 Apple Pay 安全结算"
+                      "Secure checkout processed by Creem (Merchant of Record). Instant digital delivery begins immediately after payment — see our ",
+                      "由授权收银平台 Creem 安全结算。付款后立即开始数字文件交付，购买即同意 "
                     )}
+                    <Link href="/terms/" className="underline hover:text-slate-300">
+                      {t("Terms", "服务条款")}
+                    </Link>{" "}
+                    &amp;{" "}
+                    <Link href="/refund/" className="underline hover:text-slate-300">
+                      {t("Refund Policy", "退款政策")}
+                    </Link>
+                    .
                   </p>
                 </div>
               </div>
