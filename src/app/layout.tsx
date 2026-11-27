@@ -9,6 +9,7 @@ import { DevStatusBadge } from "@/components/DevStatusBadge";
 import { ContactFloatingWidget } from "@/components/ContactFloatingWidget";
 import { AmbientBackground } from "@/components/ui/TechPrimitives";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -51,19 +52,21 @@ export default function RootLayout({
         <meta name="google" content="notranslate" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){if(typeof Node==="function"&&Node.prototype){var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c&&c.parentNode!==this){return c;}return r.apply(this,arguments);};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this){return n;}return i.apply(this,arguments);};}})();`,
+            __html: `(function(){try{if(localStorage.getItem("switchcn_theme")==="light"){document.documentElement.classList.add("light");document.documentElement.style.colorScheme="light";}}catch(e){}if(typeof Node==="function"&&Node.prototype){var r=Node.prototype.removeChild;Node.prototype.removeChild=function(c){if(c&&c.parentNode!==this){return c;}return r.apply(this,arguments);};var i=Node.prototype.insertBefore;Node.prototype.insertBefore=function(n,ref){if(ref&&ref.parentNode!==this){return n;}return i.apply(this,arguments);};}})();`,
           }}
         />
       </head>
       <body className="notranslate relative flex min-h-screen flex-col bg-[#030712] font-sans text-slate-100">
-        <LanguageProvider>
-          <AmbientBackground />
-          <Navbar />
-          <main className="relative z-10 flex-1">{children}</main>
-          <Footer />
-          <ContactFloatingWidget />
-          <DevStatusBadge />
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <AmbientBackground />
+            <Navbar />
+            <main className="relative z-10 flex-1">{children}</main>
+            <Footer />
+            <ContactFloatingWidget />
+            <DevStatusBadge />
+          </LanguageProvider>
+        </ThemeProvider>
         {siteConfig.cloudflareAnalyticsToken ? (
           <script
             defer

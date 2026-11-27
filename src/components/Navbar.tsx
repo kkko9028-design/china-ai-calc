@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRightLeft, Languages } from "lucide-react";
+import { ArrowRightLeft, Languages, Moon, Sun } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { lang, setLang, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -60,6 +62,29 @@ export function Navbar() {
               {label}
             </Link>
           ))}
+
+          {/* Dark / Light Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={
+              theme === "dark"
+                ? t("Switch to light mode", "切换为浅色模式")
+                : t("Switch to dark mode", "切换为深色模式")
+            }
+            title={
+              theme === "dark"
+                ? t("Switch to light mode", "切换为浅色模式")
+                : t("Switch to dark mode", "切换为深色模式")
+            }
+            className="ml-1 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.1] bg-white/[0.03] text-slate-300 transition hover:border-emerald-400/40 hover:text-emerald-300"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-3.5 w-3.5" />
+            ) : (
+              <Moon className="h-3.5 w-3.5" />
+            )}
+          </button>
 
           {/* EN / 中文 Language Switcher */}
           <div
