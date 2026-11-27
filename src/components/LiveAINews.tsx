@@ -148,29 +148,71 @@ export function LiveAINews() {
   const fetchFeeds = useCallback(async () => {
     setLoading(true);
     try {
-      const [globalRes, chinaRes] = await Promise.all([
-        fetch(
-          "https://hn.algolia.com/api/v1/search_by_date?query=LLM%20OR%20OpenAI%20OR%20Claude%20OR%20Gemini%20OR%20AI%20API&tags=story&numericFilters=points>5&hitsPerPage=8",
-          { cache: "no-store" }
-        ),
-        fetch(
-          "https://hn.algolia.com/api/v1/search_by_date?query=DeepSeek%20OR%20Qwen%20OR%20Kimi%20OR%20Moonshot%20OR%20Alibaba%20AI&tags=story&hitsPerPage=8",
-          { cache: "no-store" }
-        ),
-      ]);
-
-      if (!globalRes.ok || !chinaRes.ok) {
-        throw new Error("Feed request failed");
+      // 1. Prefer our Cloudflare Worker real-time aggregator (TechCrunch AI RSS + live HN single-keyword feeds)
+      const workerRes = await fetch("/api/news", { cache: "no-store" });
+      if (workerRes.ok) {
+        const payload = (await workerRes.json()) as {
+          ok?: boolean;
+          global?: NewsItem[];
+          china?: NewsItem[];
+        };
+        if (payload.ok && Array.isArray(payload.global) && payload.global.length > 0) {
+          setGlobalItems(payload.global.slice(0, 6));
+          if (Array.isArray(payload.china) && payload.china.length > 0) {
+            setChinaItems(payload.china.slice(0, 6));
+          }
+          setIsLiveSource(true);
+          setLastSynced(
+            new Date().toLocaleTimeString("en-US", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            })
+          );
+          return;
+        }
       }
 
-      const [globalJson, chinaJson] = await Promise.all([
-        globalRes.json(),
-        chinaRes.json(),
+      // 2. Local dev fallback: separate single-keyword Algolia HN queries (Algolia does not support boolean OR in query)
+      const [aiRes, llmRes, dsRes, qwenRes] = await Promise.all([
+        fetch(
+          "https://hn.algolia.com/api/v1/search_by_date?query=AI&tags=story&numericFilters=points>15&hitsPerPage=6",
+          { cache: "no-store" }
+        ),
+        fetch(
+          "https://hn.algolia.com/api/v1/search_by_date?query=LLM&tags=story&numericFilters=points>10&hitsPerPage=4",
+          { cache: "no-store" }
+        ),
+        fetch(
+          "https://hn.algolia.com/api/v1/search_by_date?query=DeepSeek&tags=story&numericFilters=points>3&hitsPerPage=4",
+          { cache: "no-store" }
+        ),
+        fetch(
+          "https://hn.algolia.com/api/v1/search_by_date?query=Qwen&tags=story&numericFilters=points>3&hitsPerPage=4",
+          { cache: "no-store" }
+        ),
       ]);
 
-      const mapHits = (hits: HNHit[]): NewsItem[] =>
-        (hits || [])
-          .filter((h) => Boolean(h?.title))
+      const [aiJson, llmJson, dsJson, qwenJson] = await Promise.all([
+        aiRes.ok ? aiRes.json() : { hits: [] },
+        llmRes.ok ? llmRes.json() : { hits: [] },
+        dsRes.ok ? dsRes.json() : { hits: [] },
+        qwenRes.ok ? qwenRes.json() : { hits: [] },
+      ]);
+
+      const mapAndSort = (hits: HNHit[]): NewsItem[] => {
+        const seen = new Set<string>();
+        return hits
+          .filter((h) => {
+            if (!h?.title || seen.has(h.objectID)) return false;
+            seen.add(h.objectID);
+            return true;
+          })
+          .sort(
+            (a, b) =>
+              new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          )
           .slice(0, 6)
           .map((h) => {
             const hnUrl = `https://news.ycombinator.com/item?id=${h.objectID}`;
@@ -185,9 +227,10 @@ export function LiveAINews() {
               publishedAt: h.created_at,
             };
           });
+      };
 
-      const mappedGlobal = mapHits(globalJson.hits);
-      const mappedChina = mapHits(chinaJson.hits);
+      const mappedGlobal = mapAndSort([...(aiJson.hits ?? []), ...(llmJson.hits ?? [])]);
+      const mappedChina = mapAndSort([...(dsJson.hits ?? []), ...(qwenJson.hits ?? [])]);
 
       if (mappedGlobal.length > 0) {
         setGlobalItems(mappedGlobal);
@@ -197,9 +240,8 @@ export function LiveAINews() {
         setChinaItems(mappedChina);
       }
 
-      const now = new Date();
       setLastSynced(
-        now.toLocaleTimeString("en-US", {
+        new Date().toLocaleTimeString("en-US", {
           hour12: false,
           hour: "2-digit",
           minute: "2-digit",
