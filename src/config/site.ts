@@ -7,8 +7,9 @@ export const siteConfig = {
   url: "https://xingyuhaha.top",
   lastUpdated: "November 27, 2026",
 
-  // === C. 免费访客统计 (Cloudflare Web Analytics — 已激活) ===
+  // === C. 免费访客统计 (Cloudflare Web Analytics + Umami Cloud — 已激活) ===
   cloudflareAnalyticsToken: "804b369bb95a489285edba8fbb3438f4",
+  umamiWebsiteId: "837068fc-0fce-491d-abed-f6a41c1feeb4",
   // 可选：Microsoft Clarity 项目 ID（免费看实时访客数 + 访客鼠标录屏回放与点击热力图）
   clarityProjectId: "",
 

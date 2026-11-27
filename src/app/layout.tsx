@@ -62,6 +62,13 @@ export default function RootLayout({
             })}
           />
         ) : null}
+        {siteConfig.umamiWebsiteId ? (
+          <script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id={siteConfig.umamiWebsiteId}
+          />
+        ) : null}
         {siteConfig.clarityProjectId ? (
           <script
             dangerouslySetInnerHTML={{
