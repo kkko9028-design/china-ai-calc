@@ -33,6 +33,10 @@ import {
   ClosingCtaBanner,
   RealWorldScenarios,
 } from "@/components/ConversionSections";
+import {
+  AffiliateInfraSection,
+  StarterKitPromoBanner,
+} from "@/components/MonetizationBlocks";
 import { AdSlot } from "@/components/AdSlot";
 import {
   FadeInSection,
@@ -179,6 +183,7 @@ export function HomeView() {
       {/* Calculator */}
       <FadeInSection>
         <SavingsCalculator />
+        <StarterKitPromoBanner />
       </FadeInSection>
 
       {/* Real-time AI & LLM News Wire */}
@@ -505,6 +510,9 @@ export function HomeView() {
           ))}
         </div>
       </section>
+
+      {/* Cloud / GPU Affiliate Recommendations */}
+      <AffiliateInfraSection />
 
       {/* Comparisons */}
       <section className="mt-20">
@@ -857,6 +865,10 @@ export function ModelGuideView({ model }: { model: AIModel }) {
       )}
 
       <SavingsCalculator defaultFromId="gpt-6.2-astra" defaultToId={model.id} />
+
+      <StarterKitPromoBanner />
+
+      <AffiliateInfraSection />
 
       <AdSlot />
 

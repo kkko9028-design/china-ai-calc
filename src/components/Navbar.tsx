@@ -22,6 +22,7 @@ export function Navbar() {
     [t("Live News", "实时资讯"), "/#live-news"],
     [t("Pricing", "价格表"), "/#pricing-table"],
     [t("Guides", "海外接入"), "/#guides"],
+    [t("Router Kit ($19)", "省钱代码包 ($19)"), "/starter-kit/"],
   ];
 
   return (

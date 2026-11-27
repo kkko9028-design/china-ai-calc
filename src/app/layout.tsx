@@ -51,6 +51,15 @@ export default function RootLayout({
           <Footer />
           <DevStatusBadge />
         </LanguageProvider>
+        {siteConfig.cloudflareAnalyticsToken ? (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({
+              token: siteConfig.cloudflareAnalyticsToken,
+            })}
+          />
+        ) : null}
       </body>
     </html>
   );
