@@ -303,7 +303,7 @@ export function LiveAINews() {
 
         {/* Controls: Tabs + Refresh */}
         <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex rounded-xl border border-white/[0.08] bg-[#060c18]/90 p-1 font-mono text-xs">
+          <div className="flex max-w-full flex-wrap rounded-xl border border-white/[0.08] bg-[#060c18]/90 p-1 font-mono text-xs">
             {tabs.map((tab) => {
               const active = activeTab === tab.id;
               return (

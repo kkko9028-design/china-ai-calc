@@ -31,7 +31,7 @@ export function ContactFloatingWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="mb-3 w-80 overflow-hidden rounded-2xl border border-emerald-400/30 bg-[#060d1a]/95 p-5 shadow-[0_16px_48px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+            className="mb-3 w-80 max-w-[calc(100vw-2.5rem)] overflow-hidden rounded-2xl border border-emerald-400/30 bg-[#060d1a]/95 p-5 shadow-[0_16px_48px_rgba(0,0,0,0.8)] backdrop-blur-xl"
           >
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2">
